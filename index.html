@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Challenge Comparer for BTD6</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="input">
+      <h1>Challenge Comparer<br />for BTD6 (remake)</h1>
+      <p>Examples: adv209320240517, ZFKLRLL</p>
+      <input type="text" spellcheck="false" autocomplete="off" placeholder="first challenge" autofocus />
+      <input type="text" spellcheck="false" autocomplete="off" placeholder="second challenge" />
+      <button type="button" onclick="main()">Compare Challenges</button>
+    </div>
+    <div class="data">
+      <h1>Challenge differences:</h1>
+      <div class="error hidden"></div>
+      <div class="changes hidden"></div>
+    </div>
+  </body>
+</html>

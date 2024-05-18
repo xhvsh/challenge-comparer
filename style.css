@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  font-family: 'Luckiest Guy', cursive;
+  letter-spacing: 2px;
+}
+body {
+  background: #333;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
+  padding: 50px 0;
+}
+.input,
+.data {
+  background: #555;
+  width: fit-content;
+  height: fit-content;
+  padding: 10px 20px;
+  color: #eee;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  border-radius: 7px;
+}
+h1,
+.input p {
+  text-align: center;
+}
+.input p {
+  font-size: 1.4rem;
+  color: #ccc;
+}
+.input input {
+  height: 40px;
+  background: #333;
+  border: none;
+  border-radius: 7px;
+  color: #ddd;
+  text-align: center;
+  font-size: 28px;
+}
+.input button {
+  height: 40px;
+  font-size: 28px;
+  cursor: pointer;
+  background: #294;
+  border: none;
+  border-radius: 7px;
+  transition: all 0.3s ease;
+  color: #ddd;
+}
+.input button:hover {
+  background: #3a5;
+  color: #fff;
+}
+.changes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1.2rem;
+}
+.error {
+  color: #f00;
+  text-align: center;
+  font-size: 22px;
+}
+
+@media (max-width: 530px) {
+  .input,.data {
+    max-width: 100vw;
+    width: 100%;
+  }
+}
+
+.hidden {
+  display: none;
+}
