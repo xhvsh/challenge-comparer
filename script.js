@@ -1,10 +1,11 @@
-async function fetchChallenge(challenge) {
+async function getChallenge(challenge) {
   const response = await fetch(`https://data.ninjakiwi.com/btd6/challenges/challenge/${challenge}`)
   const data = await response.json()
   if (!data.success) {
     return
   }
   const body = data.body
+
   if (body.removeableCostMultiplier === -1) body.removeableCostMultiplier = 1
   body._towers = body?._towers?.filter((x) => x?.max !== 0)
   body?._towers?.sort((a, b) => (a?.tower?.toUpperCase() < b?.tower?.toUpperCase() ? -1 : a?.tower?.toUpperCase() > b?.tower?.toUpperCase() ? 1 : 0))
@@ -24,8 +25,9 @@ async function fetchChallenge(challenge) {
   return body
 }
 
-function cleanChallenge(challenge) {
+function clean(challenge) {
   const body = challenge
+
   delete body?.name
   delete body?.createdAt
   delete body?.id
@@ -50,6 +52,7 @@ function cleanChallenge(challenge) {
   delete body?._bloonModifiers?.healthMultipliers?.boss
   delete body?._bloonModifiers
   delete body?._towers
+
   return body
 }
 
@@ -65,36 +68,55 @@ function fixMax(max) {
 
 async function main() {
   if (document.querySelectorAll('input')[0].value.length < 7 || document.querySelectorAll('input')[1].value.length < 7) {
-    document.querySelector('.changes').classList.add('hidden')
-    document.querySelector('.error').classList.remove('hidden')
-    document.querySelector('.error').innerHTML = 'You need to enter two valid codes!'
+    alert('Enter two valid codes please.')
     return
   }
-  const challenge1 = cleanChallenge(await fetchChallenge(document.querySelectorAll('input')[0].value))
-  const challenge2 = cleanChallenge(await fetchChallenge(document.querySelectorAll('input')[1].value))
-  if (!challenge1 || !challenge2) {
-    document.querySelector('.changes').classList.add('hidden')
-    document.querySelector('.error').classList.remove('hidden')
-    document.querySelector('.error').innerHTML = 'You need to enter two valid codes!'
+
+  const ch1 = clean(await getChallenge(document.querySelectorAll('input')[0].value))
+  const ch2 = clean(await getChallenge(document.querySelectorAll('input')[1].value))
+
+  if (!ch1 || !ch2) {
+    alert('Enter two valid codes please.')
     return
   }
-  if (JSON.stringify(challenge1) === JSON.stringify(challenge2)) {
-    document.querySelector('.changes').classList.add('hidden')
-    document.querySelector('.error').classList.remove('hidden')
-    document.querySelector('.error').innerHTML = 'No difference found!'
+
+  if (JSON.stringify(ch1) === JSON.stringify(ch2)) {
+    alert('There are no differences in this challenges.')
   } else {
-    const challenge1Keys = Object.keys(challenge1)
-    const challenge2Keys = Object.keys(challenge2)
-    const keys = new Set([...challenge1Keys, ...challenge2Keys])
-    for (const key of keys) {
-      if (challenge1[key] !== challenge2[key]) {
-        document.querySelector('.error').classList.add('hidden')
-        document.querySelector('.changes').classList.remove('hidden')
-        const p = document.createElement('p')
-        const node = document.createTextNode(`${key}: ${challenge1[key]} vs ${challenge2[key]}\n`)
-        p.appendChild(node)
-        document.querySelector('.changes').appendChild(p)
+    document.querySelector('table').innerHTML = `
+    <tr>
+      <th>Difference</th>
+      <th>First Challenge</th>
+      <th>Second Challenge</th>
+    </tr>
+    `
+    document.querySelector('.content').classList.add('hidden')
+    document.querySelector('.differences').classList.remove('hidden')
+    const ch1keys = Object.keys(ch1)
+    const ch2keys = Object.keys(ch2)
+    const allkeys = new Set([...ch1keys, ...ch2keys])
+
+    for (const key of allkeys) {
+      if (ch1[key] !== ch2[key]) {
+        document.querySelector('table').innerHTML += `
+          <tr>
+            <td>${key}</td>
+            <td>${ch1[key]}</td>
+            <td>${ch2[key]}</td>
+          </tr>
+        `
       }
     }
   }
 }
+
+document.querySelector('.goback').addEventListener('click', () => {
+  document.querySelector('.content').classList.remove('hidden')
+  document.querySelector('.differences').classList.add('hidden')
+  document.querySelectorAll('tr').forEach((e) => {
+    e.remove
+  })
+  document.querySelectorAll('input').forEach((e) => {
+    e.value = ''
+  })
+})

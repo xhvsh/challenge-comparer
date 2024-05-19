@@ -1,81 +1,165 @@
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 * {
   margin: 0;
   padding: 0;
   min-width: 0;
   box-sizing: border-box;
-  font-family: 'Luckiest Guy', cursive;
-  letter-spacing: 2px;
 }
 body {
-  background: #333;
-  min-height: 100vh;
+  background: #12141d;
+  padding: 20px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+h1 {
+  font-family: 'Luckiest Guy';
+  color: #fff;
+  font-size: 2.7rem;
+  letter-spacing: 2px;
+}
+.content,
+.differences {
+  background: #1e2029;
+  width: calc(100vw - 100px);
+  height: fit-content;
+  border-radius: 8px;
+  font-family: 'Nunito', sans-serif;
+}
+.content {
+  padding: 100px;
+}
+.differences {
+  padding: 50px;
+}
+.abt {
+  width: 70%;
+}
+span {
+  color: #ff934f;
+}
+h2 {
+  color: #fff;
+  font-size: 4rem;
+  width: 80%;
+}
+p {
+  color: #b5b8c1;
+}
+.info {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.examples {
+  font-size: 1rem;
+  margin-top: 10px;
+}
+form {
+  margin-top: 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 30px;
-  padding: 50px 0;
+  gap: 10px;
 }
-.input,
-.data {
-  background: #555;
-  width: fit-content;
-  height: fit-content;
-  padding: 10px 20px;
-  color: #eee;
-  display: flex;
-  gap: 20px;
-  flex-direction: column;
-  border-radius: 7px;
-}
-h1,
-.input p {
-  text-align: center;
-}
-.input p {
+input,
+button {
+  padding: 15px 20px;
+  border: none;
+  outline: none;
   font-size: 1.4rem;
-  color: #ccc;
+  border-radius: 5px;
+  max-width: 100%;
 }
-.input input {
-  height: 40px;
-  background: #333;
-  border: none;
-  border-radius: 7px;
-  color: #ddd;
-  text-align: center;
-  font-size: 28px;
-}
-.input button {
-  height: 40px;
-  font-size: 28px;
-  cursor: pointer;
-  background: #294;
-  border: none;
-  border-radius: 7px;
-  transition: all 0.3s ease;
-  color: #ddd;
-}
-.input button:hover {
-  background: #3a5;
+input {
+  font-family: 'Roboto Mono', monospace;
+  background: #35373f;
   color: #fff;
 }
-.changes {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 1.2rem;
+input::placeholder {
+  color: #9b9ca0;
 }
-.error {
-  color: #f00;
-  text-align: center;
-  font-size: 22px;
+button {
+  font-family: 'Roboto Mono', monospace;
+  background: #ff715b;
+  cursor: pointer;
+  font-weight: 800;
+  color: #fff;
+  transition: all 0.3s ease;
+  min-width: 33%;
+}
+button:hover {
+  background: #ff5338;
+}
+table {
+  width: 100%;
+  height: fit-content;
+  gap: 5px;
+  font-size: 1.4rem;
+}
+tr {
+  width: 100%;
+}
+th {
+  padding: 10px;
+  background: #ff715b;
+  color: #fff;
+}
+td {
+  padding: 5px 15px;
+  background: #313238;
+  color: #ddd;
+}
+.goback {
+  width: 100%;
+  margin-top: 20px;
 }
 
-@media (max-width: 530px) {
-  .input,.data {
-    max-width: 100vw;
+@media (max-width: 1060px) {
+  form {
+    flex-direction: column;
+  }
+  input,
+  button {
     width: 100%;
+  }
+}
+@media (max-width: 1000px) {
+  .differences {
+    background: transparent;
+    padding: 0;
+  }
+}
+@media (max-width: 788px) {
+  h2 {
+    width: 100%;
+  }
+}
+@media (max-width: 690px) {
+  .abt {
+    width: 100%;
+  }
+}
+@media (max-width: 580px) {
+  h2 {
+    font-size: 3rem;
+  }
+  .info {
+    font-size: 1rem;
+  }
+  input,
+  button {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 513px) {
+  h1 {
+    display: none;
+  }
+  .content,
+  .differences {
+    background: transparent;
+    padding: 0;
   }
 }
 
