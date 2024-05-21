@@ -1,6 +1,8 @@
-if (window.location == 'https://xhvsh.github.io/challenge-comparer/') {
-  window.location == 'https://xhvsh.github.io/challenge-comparer/index.html'
-}
+setInterval(() => {
+  if (window.location == 'https://xhvsh.github.io/challenge-comparer/') {
+    window.location == 'https://xhvsh.github.io/challenge-comparer/index.html'
+  }
+}, 100)
 
 let popupOpen = false
 function toast(str) {
