@@ -1,9 +1,3 @@
-setInterval(() => {
-  if (window.location == 'xhvsh.github.io/challenge-comparer/' || 'https://xhvsh.github.io/challenge-comparer/' || 'xhvsh.github.io/challenge-comparer' || 'https://xhvsh.github.io/challenge-comparer') {
-    window.location = `https://xhvsh.github.io/challenge-comparer/index.html`
-  }
-}, 100)
-
 let popupOpen = false
 function toast(str) {
   if (!popupOpen) {
@@ -95,7 +89,7 @@ async function main() {
     toast('There are no differences in this challenges.')
     return
   }
-  let link = window.location.href.replace(/index.html/g, 'challenge.html')
+  let link = 'https://xhvsh.github.io/challenge-comparer/challenge.html'
   let newlink = `${link}?ch1=${inputs[0].value.trim()}&ch2=${inputs[1].value.trim()}`
   window.location = newlink
 }
