@@ -181,6 +181,20 @@ td {
   margin-left: 12px;
   color: #fff;
 }
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+.sharebtn {
+  font-family: 'Nunito', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+  width: min-content;
+  padding: 10px 20px;
+}
 
 @keyframes spin {
   0% {
@@ -232,6 +246,15 @@ td {
 }
 @media (max-width: 690px) {
   .abt {
+    width: 100%;
+  }
+}
+@media (max-width: 645px) {
+  .top {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .sharebtn {
     width: 100%;
   }
 }

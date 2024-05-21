@@ -88,8 +88,8 @@ async function main() {
   table.innerHTML = `
     <tr>
       <th>Difference</th>
-      <th>First Challenge</th>
-      <th>Second Challenge</th>
+      <th>First Challenge<br>(${inputs[0].value})</th>
+      <th>Second Challenge<br>(${inputs[1].value})</th>
     </tr>
   `
 
@@ -116,3 +116,7 @@ async function main() {
 
 getUrl()
 main()
+
+function copy() {
+  navigator.clipboard.writeText(window.location)
+}
