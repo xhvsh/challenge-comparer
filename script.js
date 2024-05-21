@@ -1,6 +1,6 @@
 setInterval(() => {
-  if (window.location == 'xhvsh.github.io/challenge-comparer') {
-    window.location == 'xhvsh.github.io/challenge-comparer/index.html'
+  if (window.location == 'xhvsh.github.io/challenge-comparer/' || 'https://xhvsh.github.io/challenge-comparer/' || 'xhvsh.github.io/challenge-comparer' || 'https://xhvsh.github.io/challenge-comparer') {
+    window.location == `https://xhvsh.github.io/challenge-comparer/index.html`
   }
 }, 100)
 
