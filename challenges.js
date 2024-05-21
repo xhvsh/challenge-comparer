@@ -1,20 +1,10 @@
-if (window.location == 'https://xhvsh.github.io/challenge-comparer/') {
-  window.location == 'https://xhvsh.github.io/challenge-comparer/index.html'
-}
+function getUrl() {
+  let ch1 = new URLSearchParams(window.location.search).get('ch1')
+  let ch2 = new URLSearchParams(window.location.search).get('ch2')
 
-let popupOpen = false
-function toast(str) {
-  if (!popupOpen) {
-    popupOpen = true
-    document.querySelector('.toast').classList.remove('hidden')
-    document.querySelector('.msg').innerHTML = str
-    setTimeout(() => {
-      document.querySelector('.toast').classList.add('hidden')
-      popupOpen = false
-    }, 5000)
-  } else {
-    return
-  }
+  const inputs = document.querySelectorAll('input')
+  inputs[0].value = ch1
+  inputs[1].value = ch2
 }
 
 async function getChallenge(challenge) {
@@ -73,7 +63,7 @@ function fixMax(max) {
 async function main() {
   const inputs = document.querySelectorAll('input')
   if (inputs[0].value.length < 7 || inputs[1].value.length < 7) {
-    toast('Enter two valid codes please.')
+    window.location = 'https://xhvsh.github.io/challenge-comparer/index.html'
     return
   }
   if (inputs[0].value.length == 7) inputs[0].value = inputs[0].value.toUpperCase()
@@ -82,7 +72,7 @@ async function main() {
   const [ch1, ch2] = await Promise.all([getChallenge(inputs[0].value), getChallenge(inputs[1].value)])
 
   if (!ch1 || !ch2) {
-    toast('Enter two valid codes please.')
+    window.location = 'https://xhvsh.github.io/challenge-comparer/index.html'
     return
   }
 
@@ -90,10 +80,39 @@ async function main() {
   const cleanedCh2 = clean(ch2)
 
   if (JSON.stringify(cleanedCh1) === JSON.stringify(cleanedCh2)) {
-    toast('There are no differences in this challenges.')
+    window.location = 'https://xhvsh.github.io/challenge-comparer/index.html'
     return
   }
-  let link = window.location.href.replace(/index.html/g, 'challenge.html')
-  let newlink = `${link}?ch1=${inputs[0].value.trim()}&ch2=${inputs[1].value.trim()}`
-  window.location = newlink
+
+  const table = document.querySelector('table')
+  table.innerHTML = `
+    <tr>
+      <th>Difference</th>
+      <th>First Challenge</th>
+      <th>Second Challenge</th>
+    </tr>
+  `
+
+  const fragment = document.createDocumentFragment()
+  const ch1keys = Object.keys(cleanedCh1)
+  const ch2keys = Object.keys(cleanedCh2)
+  const allkeys = new Set([...ch1keys, ...ch2keys])
+
+  for (const key of allkeys) {
+    if (cleanedCh1[key] !== cleanedCh2[key]) {
+      const row = document.createElement('tr')
+
+      row.innerHTML = `
+        <td>${key.replace(/([A-Z])/g, ' $1').replace('M K', 'MK')}</td>
+        <td>${String(cleanedCh1[key]).replace(/([A-Z])/g, ' $1')}</td>
+        <td>${String(cleanedCh2[key]).replace(/([A-Z])/g, ' $1')}</td>
+      `
+      fragment.appendChild(row)
+    }
+  }
+
+  table.appendChild(fragment)
 }
+
+getUrl()
+main()
